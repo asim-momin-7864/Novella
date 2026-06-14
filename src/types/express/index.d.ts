@@ -4,7 +4,6 @@ import { Types } from 'mongoose';
 // JWt payload and user object
 export interface UserPayload {
   _id: Types.ObjectId | string;
-  email: string;
 }
 
 // globaly merging
