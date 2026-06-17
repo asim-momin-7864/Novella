@@ -12,6 +12,9 @@ import { logger } from '@utils/logger.js';
 import { AppError } from '@errors/AppError.js';
 import { globalErrorHandler } from '@middlewares/error.middleware.js';
 
+//
+import authRoutes from '@routes/auth.routes.js';
+
 // instance
 const app: Application = express();
 
@@ -46,9 +49,10 @@ app.get('/api/v1/health', (_req, res) => {
 });
 
 // routes
+app.use('/api/v1/auth', authRoutes);
 
 // unhandled route fallback
-app.all('*', (req, _res, next) => {
+app.all('/{*splat}', (req, _res, next) => {
   const err = new AppError(`The path ${req.originalUrl} does not exist on this server`, 404);
   next(err);
 });
