@@ -5,6 +5,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import { pinoHttp } from 'pino-http';
 import rateLimit from 'express-rate-limit';
+import cookieParser from 'cookie-parser';
 
 // user define modules
 import { env } from '@config/env.config.js';
@@ -30,6 +31,8 @@ app.use(
 // body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cookieParser());
 
 // request logging
 app.use(pinoHttp({ logger }));
