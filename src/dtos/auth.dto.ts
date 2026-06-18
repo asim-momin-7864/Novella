@@ -1,6 +1,8 @@
 //* auth dto
 import * as z from 'zod';
 
+// for input validations from zod
+
 // registration schema
 export const RegisterSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters long').max(50),
