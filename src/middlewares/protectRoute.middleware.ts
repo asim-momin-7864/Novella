@@ -11,7 +11,7 @@ interface DecodedToken extends JwtPayload {
 }
 
 // function
-export const protectRoute = (req: Request, res: Response, next: NextFunction): void => {
+export const protectRoute = (req: Request, _res: Response, next: NextFunction): void => {
   // extract token from cookies
   const token = req.cookies?.jwt;
 
