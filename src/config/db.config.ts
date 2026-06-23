@@ -1,7 +1,7 @@
 //* DB config
 import mongoose from 'mongoose';
 import { env } from '@config/env.config.js';
-import { logger } from '@utils/logger.js';
+import { baseLogger as logger } from '@utils/logger.js';
 
 export const connectDB = async (): Promise<void> => {
   try {

@@ -10,7 +10,7 @@ dotenv.config();
 
 const envSchema = z.object({
   PORT: z.string().default('5000'),
-  NODE_ENV: z.enum(['development', 'prouction', 'test']).default('development'),
+  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   MONGO_URI: z.string({ error: 'MONGO_URI is required' }),
   JWT_SECRET: z.string({ error: 'JWT_SECRET is required' }),
   JWT_EXPIRES_IN: z.string().default('7d') as unknown as z.ZodType<jwt.SignOptions['expiresIn']>,

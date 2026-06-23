@@ -3,13 +3,16 @@
 import express, { type Application } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import pino from 'pino';
 import { pinoHttp } from 'pino-http';
+import crypto from 'crypto';
+import { expressMiddleware } from 'pino-correlation-id';
 import rateLimit from 'express-rate-limit';
 import cookieParser from 'cookie-parser';
 
 // user define modules
 import { env } from '@config/env.config.js';
-import { logger } from '@utils/logger.js';
+import { baseLogger } from '@utils/logger.js';
 import { AppError } from '@errors/AppError.js';
 import { globalErrorHandler } from '@middlewares/error.middleware.js';
 
@@ -24,7 +27,7 @@ const app: Application = express();
 app.use(helmet());
 app.use(
   cors({
-    origin: env.NODE_ENV === 'prouction' ? 'production-url.com' : '*',
+    origin: env.NODE_ENV === 'production' ? 'production-url.com' : '*',
   })
 );
 
@@ -35,7 +38,45 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // request logging
-app.use(pinoHttp({ logger }));
+// ---------------------------------------------------------
+// 1. THE THREAD ISOLATOR (pino-correlation-id)
+// This strictly manages the UUID context so getLogger() works in controllers.
+// It does NOT print any logs.
+// ---------------------------------------------------------
+app.use(
+  expressMiddleware({
+    generateId: () => crypto.randomUUID(),
+    header: 'x-request-id', // Automatically extracts from or sets this response header
+  })
+);
+
+// ---------------------------------------------------------
+// 2. THE NETWORK GATEKEEPER (pino-http)
+// This prints the actual "request completed" logs.
+// ---------------------------------------------------------
+app.use(
+  pinoHttp({
+    logger: baseLogger, // passing our core logger
+
+    // pino-http to extract ID what is created by pino-corellation-id pakcage
+    // do not geneate its own
+    genReqId: (req) => req.id,
+
+    // serialization
+    serializers: {
+      req: (req) => ({
+        id: req.id,
+        method: req.method,
+        url: req.url,
+        remoteAddress: req.remoteAddress,
+      }),
+      res: (res) => ({
+        statusCode: res.statusCode,
+      }),
+      err: pino.stdSerializers.err,
+    },
+  })
+);
 
 // rate limitig
 const limitier = rateLimit({

@@ -4,9 +4,14 @@ import { User } from '@models/user.model.js';
 import { RegisterSchema, LoginSchema } from '@dtos/auth.dto.js';
 import { generateTokenAndSetCookie } from '@utils/auth.utils.js';
 import { AppError } from '@errors/AppError.js';
+import { getLogger } from 'pino-correlation-id';
+import { baseLogger } from '@utils/logger.js';
 
 // register/signup
 export const register = async (req: Request, res: Response) => {
+  // log
+  const logger = getLogger(baseLogger);
+
   // zod validation (throw error to global handler)
   const validatedData = RegisterSchema.parse(req.body);
 
@@ -23,6 +28,9 @@ export const register = async (req: Request, res: Response) => {
   // geneate token and set in cookies
   generateTokenAndSetCookie(user.id, res);
 
+  // log
+  logger.info({ userId: user._id, email: user.email }, 'New user account successfully created');
+
   // res
   res.status(201).json({
     success: true,
@@ -36,6 +44,9 @@ export const register = async (req: Request, res: Response) => {
 
 // login
 export const login = async (req: Request, res: Response) => {
+  // logger
+  const logger = getLogger(baseLogger);
+
   // zod validation
   const validatedData = LoginSchema.parse(req.body);
 
@@ -49,6 +60,9 @@ export const login = async (req: Request, res: Response) => {
 
   // generate token and set in cookie
   generateTokenAndSetCookie(user.id, res);
+
+  // log
+  logger.info({ userId: user._id }, 'User successfully authenticated and logged in');
 
   //res
   res.status(200).json({

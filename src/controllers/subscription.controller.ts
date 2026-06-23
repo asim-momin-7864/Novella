@@ -5,9 +5,14 @@ import { Subscription } from '@models/subscription.model.js';
 import { CreateSubscriptionSchema, UpdateSubscriptionSchema } from '@dtos/subscription.dto.js';
 import { AppError } from '@errors/AppError.js';
 import type { Types } from 'mongoose';
+import { getLogger } from 'pino-correlation-id';
+import { baseLogger } from '@utils/logger.js';
 
 // create subscription
 export const createSubscription = async (req: Request, res: Response) => {
+  // logger
+  const logger = getLogger(baseLogger);
+
   // validate incoming data
   const validatedDate = CreateSubscriptionSchema.parse(req.body);
 
@@ -16,6 +21,16 @@ export const createSubscription = async (req: Request, res: Response) => {
     ...validatedDate,
     user: req.user!._id, // "!" asserts to TS that protectRoute guarantees this exists
   });
+
+  // log
+  logger.info(
+    {
+      userId: req.user!._id,
+      subscriptionId: subscription._id,
+      amount: subscription.price,
+    },
+    'Vault item: Subscription added'
+  );
 
   res.status(201).json({ success: true, data: subscription });
 };
@@ -86,6 +101,9 @@ export const updateSubscription = async (req: Request, res: Response) => {
 
 // delete subscription
 export const deleteSubscription = async (req: Request, res: Response) => {
+  // logger
+  const logger = getLogger(baseLogger);
+
   const subscription = await Subscription.findOneAndDelete({
     _id: req.params.id as unknown as Types.ObjectId,
     user: req.user!._id as unknown as Types.ObjectId,
@@ -95,6 +113,15 @@ export const deleteSubscription = async (req: Request, res: Response) => {
   if (!subscription) {
     throw new AppError('Subscription not found or unauthorized', 404);
   }
+
+  //log
+  logger.info(
+    {
+      userId: req.user!._id,
+      subscriptionId: subscription._id,
+    },
+    'Vault item: Subscription removed'
+  );
 
   res.status(200).json({
     success: true,
