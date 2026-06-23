@@ -1,7 +1,7 @@
 //* Pino logger setup
 import pino from 'pino';
 import type { LoggerOptions } from 'pino';
-import { env } from '@config/env.config.js';
+import { env } from '#config/env.config.js';
 
 //* this redact and strucure log is done by - pino core package
 const loggerOptions: LoggerOptions = {

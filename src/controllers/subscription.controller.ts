@@ -1,12 +1,12 @@
 //* Subscription controller
 
 import type { Request, Response } from 'express';
-import { Subscription } from '@models/subscription.model.js';
-import { CreateSubscriptionSchema, UpdateSubscriptionSchema } from '@dtos/subscription.dto.js';
-import { AppError } from '@errors/AppError.js';
+import { Subscription } from '#models/subscription.model.js';
+import { CreateSubscriptionSchema, UpdateSubscriptionSchema } from '#dtos/subscription.dto.js';
+import { AppError } from '#errors/AppError.js';
 import { Types } from 'mongoose';
 import { getLogger } from 'pino-correlation-id';
-import { baseLogger } from '@utils/logger.js';
+import { baseLogger } from '#utils/logger.js';
 
 // create subscription
 export const createSubscription = async (req: Request, res: Response) => {

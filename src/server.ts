@@ -1,8 +1,8 @@
 //* Server
 import app from './app.js';
-import { connectDB } from '@config/db.config.js';
-import { env } from '@config/env.config.js';
-import { baseLogger as logger } from '@utils/logger.js';
+import { connectDB } from '#config/db.config.js';
+import { env } from '#config/env.config.js';
+import { baseLogger as logger } from '#utils/logger.js';
 
 const startServer = async () => {
   // establish DB connection

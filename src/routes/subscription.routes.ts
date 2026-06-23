@@ -1,13 +1,13 @@
 //* Subscription route
 import { Router } from 'express';
-import { protectRoute } from '@middlewares/protectRoute.middleware.js';
+import { protectRoute } from '#middlewares/protectRoute.middleware.js';
 import {
   createSubscription,
   getSubscriptions,
   getSubscriptionById,
   updateSubscription,
   deleteSubscription,
-} from '@controllers/subscription.controller.js';
+} from '#controllers/subscription.controller.js';
 
 // insatnce router
 const router = Router();

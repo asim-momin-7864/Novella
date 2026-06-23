@@ -1,7 +1,7 @@
 //* auth
 import type { Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { env } from '@config/env.config.js';
+import { env } from '#config/env.config.js';
 
 // type of sign option
 type SignOptionsExpiresIn = NonNullable<jwt.SignOptions['expiresIn']>;

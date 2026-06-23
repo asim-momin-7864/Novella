@@ -10,15 +10,15 @@ import { expressMiddleware } from 'pino-correlation-id';
 import cookieParser from 'cookie-parser';
 
 // user define modules
-import { env } from '@config/env.config.js';
-import { baseLogger } from '@utils/logger.js';
-import { AppError } from '@errors/AppError.js';
-import { globalErrorHandler } from '@middlewares/error.middleware.js';
-import { apiLimiter } from '@middlewares/rateLimiter.middleware.js';
+import { env } from '#config/env.config.js';
+import { baseLogger } from '#utils/logger.js';
+import { AppError } from '#errors/AppError.js';
+import { globalErrorHandler } from '#middlewares/error.middleware.js';
+import { apiLimiter } from '#middlewares/rateLimiter.middleware.js';
 
 // routes
-import authRoutes from '@routes/auth.routes.js';
-import subscriptionRoutes from '@routes/subscription.routes.js';
+import authRoutes from '#routes/auth.routes.js';
+import subscriptionRoutes from '#routes/subscription.routes.js';
 
 // instance
 const app: Application = express();

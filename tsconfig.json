@@ -41,14 +41,14 @@
 
     /* 7. Production-grade Absolute Path Alignment (Aliases) */
     "paths": {
-      "@config/*": ["./src/config/*"],
-      "@controllers/*": ["./src/controllers/*"],
-      "@dtos/*": ["./src/dtos/*"],
-      "@errors/*": ["./src/errors/*"],
-      "@middlewares/*": ["./src/middlewares/*"],
-      "@models/*": ["./src/models/*"],
-      "@routes/*": ["./src/routes/*"],
-      "@utils/*": ["./src/utils/*"]
+      "#config/*.js": ["./src/config/*.ts"],
+      "#utils/*.js": ["./src/utils/*.ts"],
+      "#errors/*.js": ["./src/errors/*.ts"],
+      "#middlewares/*.js": ["./src/middlewares/*.ts"],
+      "#controllers/*.js": ["./src/controllers/*.ts"],
+      "#models/*.js": ["./src/models/*.ts"],
+      "#routes/*.js": ["./src/routes/*.ts"],
+      "#dtos/*.js": ["./src/dtos/*.ts"]
     }
   },
   "include": ["src/**/*"],

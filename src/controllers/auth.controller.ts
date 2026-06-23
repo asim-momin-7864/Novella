@@ -1,11 +1,11 @@
 //* auth controller
 import type { Request, Response } from 'express';
-import { User } from '@models/user.model.js';
-import { RegisterSchema, LoginSchema } from '@dtos/auth.dto.js';
-import { generateTokenAndSetCookie } from '@utils/auth.utils.js';
-import { AppError } from '@errors/AppError.js';
+import { User } from '#models/user.model.js';
+import { RegisterSchema, LoginSchema } from '#dtos/auth.dto.js';
+import { generateTokenAndSetCookie } from '#utils/auth.utils.js';
+import { AppError } from '#errors/AppError.js';
 import { getLogger } from 'pino-correlation-id';
-import { baseLogger } from '@utils/logger.js';
+import { baseLogger } from '#utils/logger.js';
 
 // register/signup
 export const register = async (req: Request, res: Response) => {

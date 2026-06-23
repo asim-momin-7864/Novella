@@ -1,5 +1,5 @@
 {
-  "name": "novella",
+  "name": "TS-subTrack",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,6 +11,16 @@
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write \"src/**/*.ts\"",
     "prepare": "husky"
+  },
+  "imports": {
+    "#config/*.js": "./dist/config/*.js",
+    "#utils/*.js": "./dist/utils/*.js",
+    "#errors/*.js": "./dist/errors/*.js",
+    "#middlewares/*.js": "./dist/middlewares/*.js",
+    "#controllers/*.js": "./dist/controllers/*.js",
+    "#models/*.js": "./dist/models/*.js",
+    "#routes/*.js": "./dist/routes/*.js",
+    "#dtos/*.js": "./dist/dtos/*.js"
   },
   "repository": {
     "type": "git",

@@ -1,10 +1,10 @@
 import type { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
 import { ZodError } from 'zod';
 import { fromZodError } from 'zod-validation-error';
-import { AppError } from '@errors/AppError.js';
-import { env } from '@config/env.config.js';
+import { AppError } from '#errors/AppError.js';
+import { env } from '#config/env.config.js';
 import { getLogger } from 'pino-correlation-id';
-import { baseLogger } from '@utils/logger.js';
+import { baseLogger } from '#utils/logger.js';
 
 // error handler
 export const globalErrorHandler: ErrorRequestHandler = (

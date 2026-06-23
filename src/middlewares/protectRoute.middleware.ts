@@ -2,8 +2,8 @@
 import type { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import type { JwtPayload } from 'jsonwebtoken';
-import { env } from '@config/env.config.js';
-import { AppError } from '@errors/AppError.js';
+import { env } from '#config/env.config.js';
+import { AppError } from '#errors/AppError.js';
 
 // type of JWT decoded data
 interface DecodedToken extends JwtPayload {
