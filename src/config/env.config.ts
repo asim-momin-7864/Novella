@@ -14,6 +14,7 @@ const envSchema = z.object({
   MONGO_URI: z.string({ error: 'MONGO_URI is required' }),
   JWT_SECRET: z.string({ error: 'JWT_SECRET is required' }),
   JWT_EXPIRES_IN: z.string().default('7d') as unknown as z.ZodType<jwt.SignOptions['expiresIn']>,
+  BETTER_STACK_SOURCE_TOKEN: z.string({ error: 'BETTER_STACK_SOURCE_TOKEN is requires' }),
 });
 
 // parsing env

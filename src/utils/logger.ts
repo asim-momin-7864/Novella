@@ -29,11 +29,9 @@ const loggerOptions: LoggerOptions = {
 // Safely add the transport property ONLY during local development
 if (env.NODE_ENV === 'development') {
   loggerOptions.transport = {
-    target: 'pino-pretty',
+    target: '@logtail/pino',
     options: {
-      colorize: true,
-      translateTime: 'SYS:yyyy-mm-dd HH:MM:ss',
-      ignore: 'pid, hostname',
+      sourceToken: env.BETTER_STACK_SOURCE_TOKEN,
     },
   };
 }

@@ -26,6 +26,8 @@
   },
   "homepage": "https://github.com/asim-momin-7864/Novella#readme",
   "dependencies": {
+    "@logtail/node": "^0.5.8",
+    "@logtail/pino": "^0.5.8",
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
