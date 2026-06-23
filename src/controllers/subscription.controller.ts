@@ -4,7 +4,7 @@ import type { Request, Response } from 'express';
 import { Subscription } from '@models/subscription.model.js';
 import { CreateSubscriptionSchema, UpdateSubscriptionSchema } from '@dtos/subscription.dto.js';
 import { AppError } from '@errors/AppError.js';
-import type { Types } from 'mongoose';
+import { Types } from 'mongoose';
 import { getLogger } from 'pino-correlation-id';
 import { baseLogger } from '@utils/logger.js';
 
@@ -54,9 +54,17 @@ export const getSubscriptions = async (req: Request, res: Response) => {
 // get a subscription by id
 export const getSubscriptionById = async (req: Request, res: Response) => {
   // required user._id and subscription._id
+
+  //! bad practice
+  // const myOneSubscription = await Subscription.findOne({
+  //   _id: req.params.id as unknown as Types.ObjectId,
+  //   user: req.user!._id as unknown as Types.ObjectId,
+  // });
+
+  //* recommended
   const myOneSubscription = await Subscription.findOne({
-    _id: req.params.id as unknown as Types.ObjectId,
-    user: req.user!._id as unknown as Types.ObjectId,
+    _id: new Types.ObjectId(req.params.id as string),
+    user: new Types.ObjectId(req.user!._id as string),
   });
 
   // check exists

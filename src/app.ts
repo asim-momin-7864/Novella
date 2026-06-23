@@ -7,7 +7,6 @@ import pino from 'pino';
 import { pinoHttp } from 'pino-http';
 import crypto from 'crypto';
 import { expressMiddleware } from 'pino-correlation-id';
-import rateLimit from 'express-rate-limit';
 import cookieParser from 'cookie-parser';
 
 // user define modules
@@ -15,6 +14,7 @@ import { env } from '@config/env.config.js';
 import { baseLogger } from '@utils/logger.js';
 import { AppError } from '@errors/AppError.js';
 import { globalErrorHandler } from '@middlewares/error.middleware.js';
+import { apiLimiter } from '@middlewares/rateLimiter.middleware.js';
 
 // routes
 import authRoutes from '@routes/auth.routes.js';
@@ -79,11 +79,8 @@ app.use(
 );
 
 // rate limitig
-const limitier = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 mins
-  max: 100, // limit each IP to 100 requests per windowMs
-});
-app.use('/api', limitier);
+// app.ts
+app.use('/api', apiLimiter);
 
 // health checking route
 app.get('/api/v1/health', (_req, res) => {
