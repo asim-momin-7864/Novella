@@ -15,6 +15,7 @@ import { env } from '#config/env.config.js';
 import { logger as baseLogger } from '#utils/logger.js';
 import { AppError } from '#errors/AppError.js';
 import { globalErrorHandler } from '#middlewares/error.middleware.js';
+import authRouter from '#routes/auth.routes.js';
 // import { apiLimiter } from '#middlewares/rateLimiter.middleware.js';
 
 const app: Application = express();
@@ -73,6 +74,9 @@ app.get('/health', (_req, res) => {
 });
 
 // application routes
+app.use('/api/v1/auth', authRouter);
+
+// last for unhandled api requests
 app.all('/{*splat}', (req, _res, next) => {
   const err = new AppError(`Route ${req.originalUrl} not found`, 404);
   next(err);
