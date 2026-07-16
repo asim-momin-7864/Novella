@@ -14,6 +14,9 @@ const envSchema = z.object({
   MONGO_URI: z.string({ error: 'MONGO_URI is required' }),
   JWT_SECRET: z.string({ error: 'JWT_SECRET is required' }),
   JWT_EXPIRES_IN: z.string().default('7d') as unknown as z.ZodType<jwt.SignOptions['expiresIn']>,
+  CLOUDINARY_API_KEY: z.string({ error: 'CLOUDINARY_API_KEY is required' }),
+  CLOUDINARY_NAME: z.string({ error: 'CLOUDINARY_NAME is required' }),
+  CLOUDINARY_API_SECRET: z.string({ error: 'CLOUDINARY_API_SECRET is required' }),
 });
 
 const _env = envSchema.safeParse(process.env);
