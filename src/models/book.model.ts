@@ -63,13 +63,11 @@ const BookSchema = new Schema<IBook>(
       type: String,
       required: true,
     },
-    genre: [
-      {
-        type: String,
-        enum: BOOK_GENERS,
-        required: true,
-      },
-    ],
+    genre: {
+      type: [String],
+      enum: BOOK_GENERS,
+      required: true,
+    },
     pages: {
       type: Number,
       required: true,
