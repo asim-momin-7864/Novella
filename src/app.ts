@@ -15,8 +15,11 @@ import { env } from '#config/env.config.js';
 import { logger as baseLogger } from '#utils/logger.js';
 import { AppError } from '#errors/AppError.js';
 import { globalErrorHandler } from '#middlewares/error.middleware.js';
+import { apiLimiter } from '#middlewares/rateLimiter.middleware.js';
+
+// Routers
 import authRouter from '#routes/auth.routes.js';
-// import { apiLimiter } from '#middlewares/rateLimiter.middleware.js';
+import bookRouter from '#routes/book.routes.js';
 
 const app: Application = express();
 
@@ -63,7 +66,7 @@ app.use(
   })
 );
 
-// app.use('/api', apiLimiter);
+app.use('/api', apiLimiter);
 
 // health
 app.get('/health', (_req, res) => {
@@ -75,6 +78,7 @@ app.get('/health', (_req, res) => {
 
 // application routes
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/book', bookRouter);
 
 // last for unhandled api requests
 app.all('/{*splat}', (req, _res, next) => {

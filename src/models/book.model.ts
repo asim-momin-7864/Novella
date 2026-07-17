@@ -1,5 +1,5 @@
 //* books model schema
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema, Types } from 'mongoose';
 import User from './user.model.js';
 
 // ts schema
@@ -12,7 +12,7 @@ export interface IBook extends Document {
   coverPublicId: string;
   fileUrl: string;
   filePublicId: string;
-  ownerId: Schema.Types.ObjectId;
+  ownerId: Types.ObjectId;
 }
 
 // book genre
