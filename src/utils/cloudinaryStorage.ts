@@ -1,6 +1,6 @@
 //* cloudinary storage utils
 
-import { cloudinaryConfig } from '#config/cloudinary.config.js';
+import cloudinary from '#config/cloudinary.config.js';
 import { UploadApiResponse } from 'cloudinary';
 
 export const upoadToCloudinary = async (
@@ -9,7 +9,7 @@ export const upoadToCloudinary = async (
 ): Promise<UploadApiResponse> => {
   // return promise
   return new Promise((resolve, reject) => {
-    const uploadStream = cloudinaryConfig.uploader.uploadStream(
+    const uploadStream = cloudinary.uploader.upload_stream(
       // resource
       {
         folder: folderName,
