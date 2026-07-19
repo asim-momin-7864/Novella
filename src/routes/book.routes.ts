@@ -23,6 +23,6 @@ router.get('/:id', getBookByIdController);
 
 router.delete('/:id', protectRoute, deleteBookController);
 
-router.put('/:id', protectRoute, parseBookFiles, updateBookController);
+router.patch('/:id', protectRoute, parseBookFiles, updateBookController);
 
 export default router;
