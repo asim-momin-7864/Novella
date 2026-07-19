@@ -192,7 +192,7 @@ export const updateBookController = async (
   const files = req.files as { [fieldname: string]: Express.Multer.File[] } | undefined;
 
   // for cover
-  if (files?.cover && files.cover.length > 0) {
+  if (files?.cover && files?.cover.length > 0) {
     // uploade new
     const newCoverBuffer: Buffer = files.cover[0].buffer;
     const coverUploadResponse: UploadApiResponse = await upoadToCloudinary(
