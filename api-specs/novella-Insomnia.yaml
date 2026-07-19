@@ -1,0 +1,295 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: "PROJECT: Novella"
+meta:
+  id: wrk_9363babc85ce43b8b532610d1d06e3e5
+  created: 1784117220764
+  modified: 1784117220764
+  description: ""
+collection:
+  - url: http://localhost:8000/health
+    name: Health
+    meta:
+      id: req_39c839dce77840d4993edf68edd3c7ea
+      created: 1784117300891
+      modified: 1784310711871
+      isPrivate: false
+      description: ""
+      sortKey: -1784310048454
+    method: GET
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - name: Auth
+    meta:
+      id: fld_0f66606a6d0e47198b391ea7ff6e7dd0
+      created: 1784117311157
+      modified: 1784117316762
+      sortKey: -1784117304156
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/auth/login"
+        name: Login
+        meta:
+          id: req_2698144fc973404b852ba1b00fde690f
+          created: 1784117311157
+          modified: 1784118152202
+          isPrivate: false
+          description: ""
+          sortKey: -1783244406943
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "email": "test@example.com",
+              "password": "password123"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/auth/logout"
+        name: Logout
+        meta:
+          id: req_63ca0e8d6f9c46d384a421c757194286
+          created: 1784117311157
+          modified: 1784117738756
+          isPrivate: false
+          description: ""
+          sortKey: -1783244382987
+        method: POST
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/auth/register"
+        name: Register
+        meta:
+          id: req_64792b8cd78645e580134839cc3663dc
+          created: 1784117311157
+          modified: 1784477305189
+          isPrivate: false
+          description: ""
+          sortKey: -1783244383087
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "name": "Test User 2",
+              "username": "testuser2",
+              "email": "test2@example.com",
+              "password": "password123"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Books
+    meta:
+      id: fld_d7acc6a0c4934cca96eafb32364fb2d3
+      created: 1784310048354
+      modified: 1784310048354
+      sortKey: -1784310048354
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/book/create"
+        name: Uploade New Book
+        meta:
+          id: req_3a9a851af29d483f8abefec5e47f4cc6
+          created: 1784310053379
+          modified: 1784480379527
+          isPrivate: false
+          description: ""
+          sortKey: -1784310053379
+        method: POST
+        body:
+          mimeType: multipart/form-data
+          params:
+            - name: title
+              value: The Misplaced Battleship
+              description: ""
+              disabled: false
+            - name: author
+              value: Harry Harrison
+              description: ""
+              disabled: false
+            - name: pages
+              value: "106"
+              description: ""
+              disabled: false
+            - name: genre
+              value: Action and Adventure
+              description: ""
+              disabled: false
+            - name: genre
+              value: Science Fiction
+              description: ""
+              disabled: false
+            - name: genre
+              value: Historical Fiction
+              description: ""
+              disabled: false
+            - name: cover
+              value: ""
+              description: ""
+              disabled: false
+              fileName: /Users/asimmomin7864/Downloads/Smaple Book PDF/battleship.jpg
+              type: file
+            - name: file
+              value: ""
+              description: ""
+              disabled: false
+              fileName: /Users/asimmomin7864/Downloads/Smaple Book PDF/The Misplaced
+                Battleship.pdf
+              type: file
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/book/all"
+        name: Get All Books
+        meta:
+          id: req_696926d28597412c8b1729b7a3dd269e
+          created: 1784477725490
+          modified: 1784477773301
+          isPrivate: false
+          description: ""
+          sortKey: -1784477725490
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/book/6a5a6ef3323b4e40c793a441"
+        name: Get Specific Book by ID
+        meta:
+          id: req_1ec466c870c24b66aa1661495ca21067
+          created: 1784477807708
+          modified: 1784477824733
+          isPrivate: false
+          description: ""
+          sortKey: -1784393889434.5
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/book/6a5d0287abf5225caddcb4bb"
+        name: Update Book
+        meta:
+          id: req_3c17d406cba943d1859182822a47ef09
+          created: 1784477837653
+          modified: 1784481041233
+          isPrivate: false
+          description: ""
+          sortKey: -1784477837653
+        method: PATCH
+        body:
+          mimeType: multipart/form-data
+          params:
+            - name: title
+              value: The Misplaced Battleship series 3
+              description: ""
+              disabled: false
+            - name: author
+              value: ""
+              description: ""
+              disabled: true
+            - name: pages
+              value: "150"
+              description: ""
+              disabled: false
+            - name: genre
+              value: ""
+              description: ""
+              disabled: true
+            - name: genre
+              value: ""
+              description: ""
+              disabled: true
+            - name: cover
+              value: ""
+              description: ""
+              disabled: false
+              fileName: /Users/asimmomin7864/Downloads/Smaple Book PDF/baron.jpg
+              type: file
+            - name: file
+              value: ""
+              description: ""
+              disabled: true
+              type: file
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_6af1430810da6e057585555aa75bc4d676187811
+    created: 1784117220765
+    modified: 1784477313458
+  cookies:
+    - id: ad8c0ba7-aa41-4d7f-aaff-0ca3417aa73c
+      key: jwt
+      value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTU3N2I3YTExYTEwNGZmOTNjODUyZWYiLCJpYXQiOjE3ODQ0NzczMTMsImV4cCI6MTc4NTA4MjExM30.b9vbdK9gReJf3CwU-8lSAvL9EGFMqJUaGJ0RK6BIrEE
+      domain: localhost
+      path: /
+      secure: false
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_6af1430810da6e057585555aa75bc4d676187811
+    created: 1784117220765
+    modified: 1784117373116
+    isPrivate: false
+  data:
+    base_url: http://localhost:8000/api/v1
