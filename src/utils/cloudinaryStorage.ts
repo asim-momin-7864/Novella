@@ -52,10 +52,21 @@ export const upoadToCloudinary = async (
 };
 
 // delete cloudinary func
-export const deleteFromCloudinary = async (publicId: string): Promise<void> => {
+export const deleteFromCloudinary = async (
+  publicId: string,
+  resourceType: 'image' | 'raw' = 'image'
+): Promise<void> => {
+  if (!publicId) {
+    // eslint-disable-next-line no-console
+    console.log('No public ID provided for deletion.');
+    return;
+  }
+
   try {
-    // destroy
-    await cloudinary.uploader.destroy(publicId, { resource_type: 'auto' });
+    // We must pass the resource_type! Defaults to 'image', but PDFs need 'raw'
+    const response = await cloudinary.uploader.destroy(publicId, { resource_type: resourceType });
+    // eslint-disable-next-line no-console
+    console.log(`Cloudinary Delete Status for ${publicId}:`, response);
   } catch (error) {
     //* why not using global middleare
     // We log the error but don't throw it, so a failed cloud deletion

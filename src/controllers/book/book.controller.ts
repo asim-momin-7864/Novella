@@ -202,7 +202,7 @@ export const updateBookController = async (
 
     if (book.coverPublicId) {
       // delete from cloudniary
-      await deleteFromCloudinary(book.coverPublicId);
+      await deleteFromCloudinary(book.coverPublicId, 'image');
     }
 
     // add in to updatedData object
@@ -219,7 +219,7 @@ export const updateBookController = async (
 
     // delete from cloudinary
     if (book.filePublicId) {
-      await deleteFromCloudinary(book.filePublicId);
+      await deleteFromCloudinary(book.filePublicId, 'raw');
     }
 
     updatedData.fileUrl = fileUploadResponse.secure_url;
