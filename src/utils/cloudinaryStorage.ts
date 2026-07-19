@@ -50,3 +50,17 @@ export const upoadToCloudinary = async (
     uploadStream.end(fileBuffer);
   });
 };
+
+// delete cloudinary func
+export const deleteFromCloudinary = async (publicId: string): Promise<void> => {
+  try {
+    // destroy
+    await cloudinary.uploader.destroy(publicId, { resource_type: 'auto' });
+  } catch (error) {
+    //* why not using global middleare
+    // We log the error but don't throw it, so a failed cloud deletion
+    // doesn't prevent the database record from being deleted.
+    // eslint-disable-next-line no-console
+    console.error(`Failed to delete from cloudinary: ${publicId}`, error);
+  }
+};
